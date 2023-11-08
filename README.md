@@ -31,7 +31,7 @@ Checklist untuk tugas ini adalah sebagai berikut:
 
     1. Apa perbedaan utama antara stateless dan stateful widget dalam konteks pengembangan aplikasi Flutter?
 
-    Dalam konteks pengembangan aplikasi Flutter, perbedaan utama antara stateless dan stateful widget adalah:
+Dalam konteks pengembangan aplikasi Flutter, perbedaan utama antara stateless dan stateful widget adalah:
 
 1. **Stateless Widget**: Stateless widget adalah widget yang tidak dapat berubah dan tidak akan pernah berubah, sifatnya mutlak dan tidak dapat diganggu gugat¹. Stateless widget merupakan widget yang dimuat secara statis dimana seluruh konfigurasi yang dimuat didalamnya telah diinisiasikan sejak awal widget tersebut dimuat¹. Contohnya, jika kita memiliki suatu widget yang didalamnya terdapat teks "Angka : 1", maka dari mulai widget tersebut dimuat hingga aplikasi berjalan isi dari widget tersebut tidak akan berubah, isinya akan tetap "Angka : 1"¹. Stateless widget cocok kita gunakan ketika kita hanya perlu menampilkan data yang sifatnya statis atau tidak perlu adanya perubahan nilai¹.
 
@@ -40,8 +40,11 @@ Checklist untuk tugas ini adalah sebagai berikut:
 Jadi, pilihan antara menggunakan stateless atau stateful widget tergantung pada kebutuhan aplikasi Anda. Jika Anda perlu menampilkan data yang sifatnya statis dan tidak perlu adanya perubahan nilai, gunakan stateless widget. Namun, jika Anda perlu widget yang dapat berubah-ubah berdasarkan interaksi pengguna atau perubahan data, gunakan stateful widget.
 
 (1) Mengenal Stateless dan Stateful Widget Pada Flutter. https://www.depotkode.com/perbedaan-stateless-dan-stateful-pada-flutter/.
+
 (2) Tutorial Flutter #3 - Perbedaan Stateless Widget dan Statefull Widget .... https://blog.rumahcoding.co.id/tutorial-flutter-3-perbedaan-stateless-widget-dan-statefull-widget/.
+
 (3) Belajar Flutter Basic #6: Stateless & Stateful Widget. https://daengweb.id/belajar-flutter-basic-6-stateless-stateful-widget.
+
 (4) Flutter: Perbedaan StatelessWidget dan StatefulWidget. https://yogabayuap.com/flutterperbedaan-statelesswidget-dan-statefullwidget/.
     
     2. Sebutkan seluruh widget yang kamu gunakan untuk menyelesaikan tugas ini dan jelaskan fungsinya masing-masing.
