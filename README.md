@@ -66,28 +66,40 @@ Source:
 Checklist untuk tugas ini adalah sebagai berikut:
 
  v Membuat minimal satu halaman baru pada aplikasi, yaitu halaman formulir tambah item baru dengan ketentuan sebagai berikut:
+
     v Memakai minimal tiga elemen input, yaitu name, amount, description. Tambahkan elemen input sesuai dengan model pada aplikasi tugas Django yang telah kamu buat.
+    
     v Memiliki sebuah tombol Save.
+
     v Setiap elemen input di formulir juga harus divalidasi dengan ketentuan sebagai berikut:
+
         v Setiap elemen input tidak boleh kosong.
+
         v Setiap elemen input harus berisi data dengan tipe data atribut modelnya.
+
  v Mengarahkan pengguna ke halaman form tambah item baru ketika menekan tombol Tambah Item pada halaman utama.
+
  v Memunculkan data sesuai isi dari formulir yang diisi dalam sebuah pop-up setelah menekan tombol Save pada halaman formulir tambah item baru.
+
  v Membuat sebuah drawer pada aplikasi dengan ketentuan sebagai berikut:
+
     v Drawer minimal memiliki dua buah opsi, yaitu Halaman Utama dan Tambah Item.
+
     v Ketika memiih opsi Halaman Utama, maka aplikasi akan mengarahkan pengguna ke halaman utama.
+
     v Ketika memiih opsi (Tambah Item), maka aplikasi akan mengarahkan pengguna ke halaman form tambah item baru.
+
  v Menjawab beberapa pertanyaan berikut pada README.md pada root folder (silakan modifikasi README.md yang telah kamu buat sebelumnya; tambahkan subjudul untuk setiap tugas).
 
     1. Jelaskan perbedaan antara Navigator.push() dan Navigator.pushReplacement(), disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!
 
-    Dalam Flutter, `Navigator.push()` dan `Navigator.pushReplacement()` adalah dua metode yang digunakan untuk berpindah antar halaman (route). Berikut adalah perbedaan antara keduanya:
+Dalam Flutter, `Navigator.push()` dan `Navigator.pushReplacement()` adalah dua metode yang digunakan untuk berpindah antar halaman (route). Berikut adalah perbedaan antara keduanya:
 
-        1. `Navigator.push()`: Metode ini digunakan untuk menavigasi ke halaman baru sambil mempertahankan halaman saat ini dalam stack navigasi. Dengan kata lain, halaman saat ini tidak dihancurkan dan dapat kembali dengan menggunakan `Navigator.pop()`. Misalnya, jika Anda berada di halaman A dan menggunakan `Navigator.push()` untuk pergi ke halaman B, Anda dapat kembali ke halaman A dengan menggunakan tombol kembali.
+    1. `Navigator.push()`: Metode ini digunakan untuk menavigasi ke halaman baru sambil mempertahankan halaman saat ini dalam stack navigasi. Dengan kata lain, halaman saat ini tidak dihancurkan dan dapat kembali dengan menggunakan `Navigator.pop()`. Misalnya, jika Anda berada di halaman A dan menggunakan `Navigator.push()` untuk pergi ke halaman B, Anda dapat kembali ke halaman A dengan menggunakan tombol kembali.
 
-        2. `Navigator.pushReplacement()`: Metode ini digunakan untuk menavigasi ke halaman baru dan menghancurkan halaman saat ini. Jadi, jika Anda berada di halaman A dan menggunakan `Navigator.pushReplacement()` untuk pergi ke halaman B, Anda tidak akan dapat kembali ke halaman A dengan menggunakan tombol kembali. Halaman A telah dihapus dari stack navigasi.
+    2. `Navigator.pushReplacement()`: Metode ini digunakan untuk menavigasi ke halaman baru dan menghancurkan halaman saat ini. Jadi, jika Anda berada di halaman A dan menggunakan `Navigator.pushReplacement()` untuk pergi ke halaman B, Anda tidak akan dapat kembali ke halaman A dengan menggunakan tombol kembali. Halaman A telah dihapus dari stack navigasi.
 
-    Berikut adalah contoh penggunaan kedua metode tersebut:
+Berikut adalah contoh penggunaan kedua metode tersebut:
 
     ```dart
     // Contoh penggunaan Navigator.push()
@@ -107,17 +119,17 @@ Checklist untuk tugas ini adalah sebagai berikut:
     }
     ```
 
-    Dalam contoh di atas, `SecondRoute()` adalah widget untuk halaman kedua yang ingin ditampilkan. Jadi, jika Anda ingin berpindah ke halaman baru dan mempertahankan halaman saat ini dalam stack navigasi, gunakan `Navigator.push()`. Namun, jika Anda ingin berpindah ke halaman baru dan menghancurkan halaman saat ini, gunakan `Navigator.pushReplacement()`.
+Dalam contoh di atas, `SecondRoute()` adalah widget untuk halaman kedua yang ingin ditampilkan. Jadi, jika Anda ingin berpindah ke halaman baru dan mempertahankan halaman saat ini dalam stack navigasi, gunakan `Navigator.push()`. Namun, jika Anda ingin berpindah ke halaman baru dan menghancurkan halaman saat ini, gunakan `Navigator.pushReplacement()`.
 
-    (1) Navigate to a new screen and back | Flutter. https://docs.flutter.dev/cookbook/navigation/navigation-basics.
+(1) Navigate to a new screen and back | Flutter. https://docs.flutter.dev/cookbook/navigation/navigation-basics.
 
-    (2) What is the difference between Navigator.pushReplacement and Navigator .... https://stackoverflow.com/questions/71609393/what-is-the-difference-between-navigator-pushreplacement-and-navigator-pushandre.
+(2) What is the difference between Navigator.pushReplacement and Navigator .... https://stackoverflow.com/questions/71609393/what-is-the-difference-between-navigator-pushreplacement-and-navigator-pushandre.
 
-    (3) replace method - Navigator class - widgets library - Dart API - Flutter. https://api.flutter.dev/flutter/widgets/Navigator/replace.html.
+(3) replace method - Navigator class - widgets library - Dart API - Flutter. https://api.flutter.dev/flutter/widgets/Navigator/replace.html.
 
-    (4) What is the difference between Navigator.pushReplacement and Navigator .... https://davy.ai/what-is-the-difference-between-navigator-pushreplacement-and-navigator-pushandremoveuntil-in-flutter/.
+(4) What is the difference between Navigator.pushReplacement and Navigator .... https://davy.ai/what-is-the-difference-between-navigator-pushreplacement-and-navigator-pushandremoveuntil-in-flutter/.
 
-    (5) navigation - What is the difference between pushReplacementNamed and .... https://stackoverflow.com/questions/59816770/what-is-the-difference-between-pushreplacementnamed-and-popandpushnamed-in-flutt.
+(5) navigation - What is the difference between pushReplacementNamed and .... https://stackoverflow.com/questions/59816770/what-is-the-difference-between-pushreplacementnamed-and-popandpushnamed-in-flutt.
 
     2. Jelaskan masing-masing layout widget pada Flutter dan konteks penggunaannya masing-masing!
 
