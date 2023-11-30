@@ -174,6 +174,391 @@ Source:
 
     3. Sebutkan apa saja elemen input pada form yang kamu pakai pada tugas kali ini dan jelaskan mengapa kamu menggunakan elemen input tersebut!
 
+Pada tugas ini, elemen input yang digunakan pada form adalah TextFormField. Elemen ini digunakan untuk menerima input teks dari user.
+
+    Beberapa manfaat dari TextFormField :
+
+- Memiliki Built-in Validation
+TextFormField memiliki validator yang berguna untuk memvalidasi input dari pengguna. Jadi, form bisa mengecek apakah pengguna melanggar beberapa kriteria tertentu (misal formnya kosong, atau input melebihi panjang).
+
+- Input Decoration
+TextFormField memiliki properti 'decoration', sehingga kita dapat dengan mudah mengubah tampilan input field yang ada di form.
+
+- Text Input Formatting
+TextFormField memiliki properti 'inputFormatters' sehingga pengguna dapat memasukan custom format pada teks mereka. Misal menambahkan koma pada angka.
+
+- Obscure Text (Password input)
+TextFormField memiliki properti 'obscureText' untuk menutup informasi sensitif seperti password.
+
     4. Bagaimana penerapan clean architecture pada aplikasi Flutter?
 
-    5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial)
+Penerapan Clean Architecture pada aplikasi Flutter melibatkan pembagian proyek menjadi beberapa lapisan utama:
+
+1. **Lapisan Data**: Berada di lapisan paling luar. Lapisan ini terdiri dari kode sumber data seperti konsumsi Rest API, akses ke database lokal, Firebase, atau sumber lainnya.
+
+2. **Lapisan Domain**: Berisi logika bisnis dan kasus penggunaan.
+
+3. **Lapisan Presentasi**: Bertanggung jawab atas antarmuka pengguna dan interaksi.
+
+Selain itu, ada beberapa komponen lain yang digunakan dalam arsitektur ini:
+
+- **Dependency Injection (DI)**: Sebuah teknik untuk mensuplai sebuah objek yang dibutuhkan oleh kelas lain.
+
+- **BLoC (Business Logic Component)**: Digunakan untuk mengelola state aplikasi dan aliran data.
+
+- **Provider**: Paket manajemen state untuk Flutter yang melengkapi Clean Architecture dengan mengelola injeksi dependensi dan propagasi state.
+
+- **Routing**: Mengatur navigasi antar halaman dalam aplikasi.
+
+Dengan menerapkan prinsip Clean Architecture, kita dapat menciptakan aplikasi yang terstruktur dengan baik dan mudah dipelihara. Arsitektur ini memperkuat pemisahan tanggung jawab, meningkatkan tesabilitas, dan memfasilitasi penggunaan kembali kode.
+
+Source
+(1) undefined. https://betterprogramming.pub/flutter-clean-architecture-test-driven-development-practical-guide-445f388e8604.
+
+(2) . https://bing.com/search?q=penerapan+clean+architecture+pada+aplikasi+Flutter.
+
+(3) Build Scalable Flutter Applications with Clean Architecture and .... https://medium.com/@shaz-tech/building-scalable-flutter-applications-with-clean-architecture-and-provider-f1e5de920807.
+
+(4) Flutter Clean Architecture Template - Belajar Informatika. https://belajarinformatika.com/flutter-clean-architecture-template/.
+
+(5) Improve your clean architecture on Flutter apps. Here is how!. https://felipeemidio.medium.com/improve-your-clean-architecture-on-flutter-apps-here-is-how-c1b90556bcd.
+
+(6) undefined. https://pub.dev/packages/flutter_clean_architecture.
+
+    5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial**)
+
+1. Membuat drawer untuk navigasi.
+```dart
+import 'package:flutter/material.dart';
+import 'package:tugas_invetory/screens/menu.dart';
+import 'package:tugas_invetory/screens/shoplist_form.dart';
+
+class LeftDrawer extends StatelessWidget {
+  const LeftDrawer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        children: [
+          const DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.indigo,
+            ),
+            child: Column(
+              children: [
+                Text(
+                  'rhaken invetory',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                Padding(padding: EdgeInsets.all(10)),
+                Text(
+                  "rhaken invetory",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.home_outlined),
+            title: const Text('Halaman Utama'),
+            // Bagian redirection ke MyHomePage
+            onTap: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MyHomePage(),
+                  ));
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.add_shopping_cart),
+            title: const Text('Tambah Produk'),
+            // Bagian redirection ke ShopFormPage
+            onTap: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ShopFormPage(),
+                  ));
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+2. Membuat form page add item untuk memasukan input item yang kita mau. Form ini memanfaatkan TextFormField sehingga bisa langsung memvalidasi input pengguna juga.
+```dart
+import 'package:flutter/material.dart';
+import 'package:tugas_invetory/widgets/left_drawer.dart';
+
+class ShopFormPage extends StatefulWidget {
+  const ShopFormPage({super.key});
+
+  @override
+  State<ShopFormPage> createState() => _ShopFormPageState();
+}
+
+class _ShopFormPageState extends State<ShopFormPage> {
+  final _formKey = GlobalKey<FormState>();
+  String _name = "";
+  int _amount = 0;
+  String _description = "";
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Center(
+          child: Text(
+            'Form Tambah Produk',
+          ),
+        ),
+        backgroundColor: Colors.indigo,
+        foregroundColor: Colors.white,
+      ),
+      drawer: const LeftDrawer(),
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: InputDecoration(
+                    hintText: "Nama Produk",
+                    labelText: "Nama Produk",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    )),
+                onChanged: (String? value) {
+                  setState(() {
+                    _name = value!;
+                  });
+                },
+                validator: (String? value) {
+                  if (value == null || value.isEmpty) {
+                    return "Nama tidak boleh kosong!";
+                  }
+                  return null;
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  hintText: "Harga",
+                  labelText: "Harga",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                ),
+                onChanged: (String? value) {
+                  setState(() {
+                    _amount = int.parse(value!);
+                  });
+                },
+                validator: (String? value) {
+                  if (value == null || value.isEmpty) {
+                    return "Harga tidak boleh kosong!";
+                  }
+                  if (int.tryParse(value) == null) {
+                    return "Harga harus berupa angka!";
+                  }
+                  return null;
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  hintText: "Deskripsi",
+                  labelText: "Deskripsi",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                ),
+                onChanged: (String? value) {
+                  setState(() {
+                    _description = value!;
+                  });
+                },
+                validator: (String? value) {
+                  if (value == null || value.isEmpty) {
+                    return "Deskripsi tidak boleh kosong!";
+                  }
+                  return null;
+                },
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.indigo),
+                  ),
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text('Produk berhasil tersimpan'),
+                            content: SingleChildScrollView(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Nama: $_name'),
+                                  Text('Jumlah: $_amount'),
+                                  Text('Deskripsi: $_description'),
+                                ],
+                              ),
+                            ),
+                            actions: [
+                              TextButton(
+                                child: const Text('OK'),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
+                    _formKey.currentState!.reset();
+                  },
+                  child: const Text(
+                    "Save",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        )),
+      ),
+    );
+  }
+}
+```
+
+3. Menambahkan drawer yang telah dibuat ke homepage. Pada file menu.dart, kita menambahkan drawer dalam widget Scaffold
+```dart
+return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.amber,
+        title: const Text(
+          'invetory',
+        ),
+      ),
+      body: SingleChildScrollView(
+        // Widget wrapper yang dapat discroll
+        child: Padding(
+          padding: const EdgeInsets.all(10.0), // Set padding dari halaman
+          child: Column(
+            // Widget untuk menampilkan children secara vertikal
+            children: <Widget>[
+              const Padding(
+                padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                // Widget Text untuk menampilkan tulisan dengan alignment center dan style yang sesuai
+                child: Text(
+                  'PBP Inventory', // Text yang menandakan toko
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              // Grid layout
+              GridView.count(
+                // Container pada card kita.
+                primary: true,
+                padding: const EdgeInsets.all(20),
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 3,
+                shrinkWrap: true,
+                children: items.map((ShopItem item) {
+                  // Iterasi untuk setiap item
+                  return ShopCard(item);
+                }).toList(),
+              ),
+            ],
+          ),
+        ),
+      ),
+      drawer: const LeftDrawer(),
+    );
+```
+
+4. Memasukan variabel drawer tadi ke form
+```dart
+class _ShopFormPageState extends State<ShopFormPage> {
+  final _formKey = GlobalKey<FormState>();
+  String _name = "";
+  int _amount = 0;
+  String _description = "";
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Center(
+          child: Text(
+            'Form Tambah Produk',
+          ),
+        ),
+        backgroundColor: Colors.indigo,
+        foregroundColor: Colors.white,
+      ),
+      drawer: const LeftDrawer(),
+      . . .
+      . . .
+```
+
+5. Memberikan fungsi pada tombol Tambah Item
+```dart
+  Widget build(BuildContext context) {
+    return Material(
+      color: item.color,
+      child: InkWell(
+        // Area responsive terhadap sentuhan
+        onTap: () {
+          // Memunculkan SnackBar ketika diklik
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(SnackBar(
+                content: Text("Kamu telah menekan tombol ${item.name}!")));
+          if (item.name == "Tambah Produk") {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ShopFormPage(),
+                ));
+          }
+        },
+        . . .
+        . . .
+```
+
+**Tugas 9**
+
